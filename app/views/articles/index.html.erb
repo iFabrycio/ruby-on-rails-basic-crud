@@ -1,0 +1,44 @@
+<style>
+    .button {
+        margin: 5px;
+        display: box;
+        border-radius: 5px;
+        background-color: rgb(200,200,200);
+        padding: 15px;
+        max-width: 150px;
+    }
+    .button:hover {
+        background-color: rgb(170,170,170);
+    }
+
+    a {
+        text-decoration:none;
+        color: black;
+    }
+
+</style>
+
+<h1>Lista de Artigos</h1>
+
+<% @articles.each do |article| %>
+    <div  class="button">
+        <a href="<%= article_path(article) %>">
+            <div>
+                <h2> <%= article.title %> </h2>
+                <p> <%= article.body %> </p>
+            </div>
+        </a>
+        <br>
+        <%= link_to "Editar", edit_article_path(article)%>
+        <br>
+        <%= link_to "Excluir", article_path(article), data: {
+            turbo_method: :delete,
+            turbo_confirm: "Tem certeza disso?"
+        } %>
+    </div>
+<% end %>
+
+<%= link_to 'Novo Artigo', new_article_path %>
+
+
+
